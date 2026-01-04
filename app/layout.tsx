@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "BuildWithOchife — Website Developer in Nigeria",
     description:
       "I design and build fast, SEO-optimised websites for individuals, startups, and healthcare professionals.",
-    url: "https://buildwithochife.com",
+    url: "https://buildwithochife.vercel.app",
     siteName: "BuildWithOchife",
     images: [
       {
