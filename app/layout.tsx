@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "BuildWithOchife — Website Developer in Nigeria",
     description:
       "Professional website developer in Nigeria building SEO-optimised websites for businesses, startups, and healthcare platforms.",
-    images: ["/og-image.jpg"],
+    images: ["https://buildwithochife.vercel.app/og-image.jpg"],
     creator: "@Tactical_God",
   },
 
