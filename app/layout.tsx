@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "BuildWithOchife",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "BuildWithOchife — Professional Website Developer",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "BuildWithOchife — Website Developer in Nigeria",
     description:
       "Professional website developer in Nigeria building SEO-optimised websites for businesses, startups, and healthcare platforms.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
     creator: "@Tactical_God",
   },
 

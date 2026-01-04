@@ -16,7 +16,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 const navItems = [
   { label: "Dashboard", href: "/account", icon: LayoutDashboard },
   { label: "Projects", href: "/myprojects", icon: FolderKanban },
-  { label: "Blog", href: "/blog", icon: PenSquare },
+  { label: "Blog", href: "/myblogs", icon: PenSquare },
   { label: "Settings", href: "/settings", icon: Settings },
 ];
 
