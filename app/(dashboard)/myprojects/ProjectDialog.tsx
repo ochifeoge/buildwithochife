@@ -12,7 +12,7 @@ import type { ProjectFormValues } from "@/lib/validators/project";
 interface ProjectDialogProps {
   children: ReactNode;
   mode: "create" | "edit";
-  defaultValues?: Partial<ProjectFormValues>;
+  defaultValues?: Partial<ProjectFormValues> & { id: string };
 }
 
 export function ProjectDialog({

@@ -31,21 +31,23 @@ export function Projects({ projects }: ProjectsProps) {
             <Card className="group overflow-hidden">
               <Link href={`/projects/${project.id}`}>
                 {/* Image */}
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={project.preview_image_url}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+                {project.preview_image_url && (
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={project.preview_image_url}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
 
-                  {/* Type badge */}
-                  <div className="absolute top-4 left-4">
-                    <Badge variant="secondary" className="capitalize">
-                      {project.type}
-                    </Badge>
+                    {/* Type badge */}
+                    <div className="absolute top-4 left-4">
+                      <Badge variant="secondary" className="capitalize">
+                        {project.type}
+                      </Badge>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Content */}
                 <CardContent className="space-y-3 p-6">

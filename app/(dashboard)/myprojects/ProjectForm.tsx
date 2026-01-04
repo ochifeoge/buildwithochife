@@ -34,7 +34,7 @@ import Image from "next/image";
 
 interface ProjectFormProps {
   mode: "create" | "edit";
-  defaultValues?: Partial<ProjectFormValues>;
+  defaultValues?: Partial<ProjectFormValues> & { id: string };
 }
 
 export default function ProjectForm({ mode, defaultValues }: ProjectFormProps) {
@@ -104,7 +104,8 @@ export default function ProjectForm({ mode, defaultValues }: ProjectFormProps) {
       if (mode === "create") {
         CreateProjectAction(formData);
       } else {
-        UpdateProjectAction(defaultValues!.id as string, formData);
+        if (!defaultValues) throw new Error("No project to edit");
+        UpdateProjectAction(defaultValues.id, formData);
       }
     });
   }
@@ -222,7 +223,7 @@ export default function ProjectForm({ mode, defaultValues }: ProjectFormProps) {
                 value={field.value}
                 onValueChange={(val) => field.onChange(val)}
               >
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-45">
                   <SelectValue placeholder="Project type" />
                 </SelectTrigger>
                 <SelectContent>

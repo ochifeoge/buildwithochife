@@ -80,13 +80,25 @@ export async function UpdateProjectAction(
 
   const image = formData.get("image") as File | null;
 
-  const updatePayload: any = {
-    title: formData.get("title"),
-    description: formData.get("description"),
-    status: formData.get("status"),
-    type: formData.get("type"),
-    live_url: formData.get("live_url"),
-    github_url: formData.get("github_url"),
+  const updatePayload: {
+    title: string;
+    description: string;
+    status: string;
+    type: string;
+    live_url: string;
+    github_url: string;
+    featured: boolean;
+    tech_stack: string[];
+    updated_at: string;
+    preview_image_url?: string;
+    preview_image_path?: string;
+  } = {
+    title: formData.get("title") as string,
+    description: formData.get("description") as string,
+    status: formData.get("status") as string,
+    type: formData.get("type") as string,
+    live_url: (formData.get("live_url") as string) || "",
+    github_url: (formData.get("github_url") as string) || "",
     featured: formData.get("featured") === "true",
     tech_stack: JSON.parse(formData.get("tech_stack") as string),
     updated_at: new Date().toISOString(),
