@@ -50,21 +50,21 @@ function MenuBar({ editor }: { editor: Editor | null }) {
       onClick: () => editor.chain().focus().toggleStrike().run(),
       preesed: editor.isActive("strike"),
     },
-    {
-      icon: <AlignLeft className="size-4" />,
-      onClick: () => editor.chain().focus().setTextAlign("left").run(),
-      preesed: editor.isActive({ textAlign: "left" }),
-    },
-    {
-      icon: <AlignCenter className="size-4" />,
-      onClick: () => editor.chain().focus().setTextAlign("center").run(),
-      preesed: editor.isActive({ textAlign: "center" }),
-    },
-    {
-      icon: <AlignRight className="size-4" />,
-      onClick: () => editor.chain().focus().setTextAlign("right").run(),
-      preesed: editor.isActive({ textAlign: "right" }),
-    },
+    // {
+    //   icon: <AlignLeft className="size-4" />,
+    //   onClick: () => editor.chain().focus().setTextAlign("left").run(),
+    //   preesed: editor.isActive({ textAlign: "left" }),
+    // },
+    // {
+    //   icon: <AlignCenter className="size-4" />,
+    //   onClick: () => editor.chain().focus().setTextAlign("center").run(),
+    //   preesed: editor.isActive({ textAlign: "center" }),
+    // },
+    // {
+    //   icon: <AlignRight className="size-4" />,
+    //   onClick: () => editor.chain().focus().setTextAlign("right").run(),
+    //   preesed: editor.isActive({ textAlign: "right" }),
+    // },
     {
       icon: <List className="size-4" />,
       onClick: () => editor.chain().focus().toggleBulletList().run(),
@@ -75,11 +75,11 @@ function MenuBar({ editor }: { editor: Editor | null }) {
       onClick: () => editor.chain().focus().toggleOrderedList().run(),
       preesed: editor.isActive("orderedList"),
     },
-    {
-      icon: <Highlighter className="size-4" />,
-      onClick: () => editor.chain().focus().toggleHighlight().run(),
-      preesed: editor.isActive("highlight"),
-    },
+    // {
+    //   icon: <Highlighter className="size-4" />,
+    //   onClick: () => editor.chain().focus().toggleHighlight().run(),
+    //   preesed: editor.isActive("highlight"),
+    // },
   ];
   return (
     <div className="border rounded-md p-1 mb-1 bg-slate-50 space-x-2 z-50">
