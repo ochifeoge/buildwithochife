@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   creator: "Ogechukwu Ochife",
   publisher: "BuildWithOchife",
 
-  metadataBase: new URL("https://buildwithochife.com"),
+  metadataBase: new URL("https://buildwithochife.vercel.app"),
 
   alternates: {
     canonical: "/",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "BuildWithOchife",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://buildwithochife.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "BuildWithOchife — Professional Website Developer",
