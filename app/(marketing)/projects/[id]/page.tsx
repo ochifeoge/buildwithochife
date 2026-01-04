@@ -37,6 +37,8 @@ export async function generateMetadata({
     "title" | "description" | "preview_image_url"
   >;
 
+  const previewImage = project.preview_image_url ?? "/previewImage.jpg";
+
   return {
     title: project.title,
     description: project.description,
@@ -47,7 +49,7 @@ export async function generateMetadata({
       type: "article",
       images: [
         {
-          url: project.preview_image_url,
+          url: previewImage,
           width: 1200,
           height: 630,
           alt: project.title,
@@ -59,7 +61,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: project.title,
       description: project.description,
-      images: [project.preview_image_url],
+      images: [previewImage],
     },
   };
 }
@@ -78,14 +80,15 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   if (!data) notFound();
 
   const project = data as Project;
-  console.log(project);
+
+  const previewImage = project.preview_image_url ?? "/previewImage.jpg";
 
   return (
     <section className="container py-24 space-y-12">
       {/* Image */}
       <div className="relative h-105 w-full overflow-hidden rounded-xl">
         <Image
-          src={project.preview_image_url}
+          src={previewImage}
           alt={project.title}
           fill
           className="object-cover"

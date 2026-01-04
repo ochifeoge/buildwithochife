@@ -35,7 +35,7 @@ export default function AuthErrorPage() {
             </Button>
 
             <Button variant="outline" asChild className="w-full">
-              <Link href="/signup">Create an account</Link>
+              <Link href="/securitycheck">Create an account</Link>
             </Button>
           </div>
         </CardContent>
