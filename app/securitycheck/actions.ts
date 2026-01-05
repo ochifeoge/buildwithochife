@@ -47,3 +47,19 @@ export async function signup(data: { email: string; password: string }) {
   revalidatePath("/", "layout");
   redirect("/account");
 }
+
+export async function SignOut() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error(error.message);
+  }
+  if (!user) throw new Error("Unauthorized");
+
+  await supabase.auth.signOut();
+}

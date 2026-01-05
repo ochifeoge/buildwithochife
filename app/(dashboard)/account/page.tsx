@@ -9,7 +9,7 @@ import { GetAllProject } from "../myprojects/project.actions";
 
 export default async function AccountPage() {
   const projects = await GetAllProject();
-  console.log(projects);
+
   return (
     <div className="space-y-6">
       <div>

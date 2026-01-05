@@ -56,14 +56,7 @@ export const metadata: Metadata = {
       "I design and build fast, SEO-optimised websites for individuals, startups, and healthcare professionals.",
     url: "https://buildwithochife.vercel.app",
     siteName: "BuildWithOchife",
-    images: [
-      {
-        url: "https://buildwithochife.vercel.app/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "BuildWithOchife — Professional Website Developer",
-      },
-    ],
+
     locale: "en_NG",
     type: "website",
   },
@@ -73,7 +66,6 @@ export const metadata: Metadata = {
     title: "BuildWithOchife — Website Developer in Nigeria",
     description:
       "Professional website developer in Nigeria building SEO-optimised websites for businesses, startups, and healthcare platforms.",
-    images: ["https://buildwithochife.vercel.app/og-image.jpg"],
     creator: "@Tactical_God",
   },
 
