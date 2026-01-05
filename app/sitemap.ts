@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: "https://buildwithochife.vercel.app",
       lastModified: new Date(),
+      priority: 1,
     },
     {
       url: "https://buildwithochife.vercel.app/projects",

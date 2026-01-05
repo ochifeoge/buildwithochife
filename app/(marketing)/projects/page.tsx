@@ -12,7 +12,15 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "A curated selection of real-world projects showcasing my work in web development, UI engineering, and product-focused solutions.",
+  keywords: [
+    "BuildWithOchife",
+    "projects",
 
+    "Frontend developer projects",
+    "WordPress developer Nigeria",
+
+    "Best website developer in Nigeria",
+  ],
   openGraph: {
     title: "Projects",
     description:

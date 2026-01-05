@@ -16,8 +16,8 @@ export default function Page() {
         await login(data);
         console.log(data);
       } else {
-        await signup(data);
-        console.log(data);
+        alert("sign up deactivated at the moment");
+        // await signup(data);
       }
     });
   }
