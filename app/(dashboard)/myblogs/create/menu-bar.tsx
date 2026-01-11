@@ -8,24 +8,19 @@ import {
   Heading2,
   Heading3,
   Highlighter,
-  Image,
+  Image as ImageIcon,
   Italic,
   List,
   ListOrdered,
   Strikethrough,
+  SeparatorHorizontal,
+  Link,
+  Code,
 } from "lucide-react";
 import { Editor } from "@tiptap/react";
-import { useCallback } from "react";
 import StorageDialog from "@/components/web/StorageDialog";
+import { useCallback } from "react";
 function MenuBar({ editor }: { editor: Editor | null }) {
-  const addImage = useCallback(() => {
-    const url = window.prompt("URL");
-
-    if (url && editor) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  }, [editor]);
-
   const addYoutubeVideo = () => {
     const url = prompt("Enter YouTube URL");
 
@@ -37,6 +32,57 @@ function MenuBar({ editor }: { editor: Editor | null }) {
       });
     }
   };
+
+  // for links
+
+  const setLink = useCallback(() => {
+    if (editor) {
+      const previousUrl = editor.getAttributes("link").href;
+      const url = window.prompt("URL", previousUrl);
+
+      // cancelled
+      if (url === null) {
+        return;
+      }
+
+      // empty
+      if (url === "") {
+        editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+        return;
+      }
+
+      // update link
+      try {
+        editor
+          .chain()
+          .focus()
+          .extendMarkRange("link")
+          .setLink({ href: url })
+          .run();
+      } catch (e) {
+        if (e instanceof Error) {
+          alert(e.message);
+        } else {
+          alert(String(e));
+        }
+      }
+    }
+  }, [editor]);
+
+  // const editorState = useEditorState({
+  //   editor,
+  //   selector: (ctx) => ({
+  //     isLink: ctx.editor && ctx.editor.isActive("link"),
+  //   }),
+  // });
+
+  // for codeblock
+  function toggleCode() {
+    if (!editor) return;
+
+    editor.commands.toggleCodeBlock();
+  }
 
   if (!editor) {
     return null;
@@ -94,6 +140,12 @@ function MenuBar({ editor }: { editor: Editor | null }) {
       preesed: editor.isActive("bulletList"),
     },
     {
+      icon: <Link className="size-4" />,
+      onClick: () => setLink(),
+
+      // preesed: editor.isActive("link"),
+    },
+    {
       icon: <ListOrdered className="size-4" />,
       onClick: () => editor.chain().focus().toggleOrderedList().run(),
       preesed: editor.isActive("orderedList"),
@@ -103,9 +155,19 @@ function MenuBar({ editor }: { editor: Editor | null }) {
       onClick: () => editor.chain().focus().toggleHighlight().run(),
       preesed: editor.isActive("highlight"),
     },
+    {
+      icon: <SeparatorHorizontal className="size-4" />,
+      onClick: () => editor.chain().focus().setHorizontalRule().run(),
+      preesed: editor.isActive("horizontalRule"),
+    },
+    {
+      icon: <Code className="size-4" />,
+      onClick: () => toggleCode(),
+      preesed: editor.isActive("codeBlock"),
+    },
   ];
   return (
-    <div className="border rounded-md p-1 mb-1 bg-slate-50 space-x-2 z-50">
+    <div className="sticky top-4 border rounded-md p-1 mb-1 bg-white/80 dark:bg-slate-900/60 backdrop-blur-sm space-x-2 z-50">
       {Options.map((option, index) => (
         <Toggle
           className="data-[state=on]:bg-blue-500 data-[state=on]:text-white [&_svg]:stroke-current"
@@ -120,8 +182,11 @@ function MenuBar({ editor }: { editor: Editor | null }) {
         bucketName={"blog-files"}
         allowedTypes={["image/*"]}
         path={"images"}
+        onSelect={(url: string) => {
+          editor.chain().focus().setImage({ src: url }).run();
+        }}
       >
-        <Image />
+        <ImageIcon />
       </StorageDialog>
       <button id="add" onClick={addYoutubeVideo}>
         Add YouTube video

@@ -1,11 +1,19 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { Projects } from "./Project";
-import { GetAllProject } from "../(dashboard)/myprojects/project.actions";
 import { ProjectsSkeleton } from "./ProjectsSkeleton";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function ProjectSection() {
-  const projects = await GetAllProject();
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("projects")
+    .select()
+    .eq("featured", true);
+
+  if (error) throw new Error();
+  const projects = data;
   return (
     <section className="container lg:py-16 py-8">
       {/* Header */}

@@ -14,17 +14,19 @@ import { Dropzone, DropzoneContent, DropzoneEmptyState } from "../dropzone";
 import { useSupabaseUpload } from "@/hooks/use-supabase-upload";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 export default function StorageDialog({
   children,
   bucketName = "blog-files",
   allowedTypes = ["image/*"],
   path = "images",
+  onSelect,
 }: {
   children: React.ReactNode;
   bucketName: string;
   allowedTypes: string[];
   path: string;
+  onSelect?: (url: string) => void;
 }) {
   const props = useSupabaseUpload({
     bucketName: bucketName,
@@ -39,51 +41,69 @@ export default function StorageDialog({
     url: string;
   };
 
-  const supabase = createClient();
+  // memoize client so it doesn't change on every render
+  const supabase = useMemo(() => createClient(), []);
   const [images, setImages] = useState<StorageImage[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const [open, setOpen] = useState(false);
+  // fetch images when dialog is opened or when bucket/path change
   useEffect(() => {
-    console.log("start");
+    if (!open) return; // only fetch when dialog is open
+
+    let mounted = true;
+
     const fetchImages = async () => {
       setLoading(true);
+      try {
+        const { data, error } = await supabase.storage
+          .from(bucketName)
+          .list(path, {
+            limit: 100,
+            sortBy: { column: "created_at", order: "desc" },
+          });
 
-      const { data, error } = await supabase.storage
-        .from(bucketName)
-        .list(path, {
-          limit: 100,
-          sortBy: { column: "created_at", order: "desc" },
-        });
+        if (error) {
+          console.error("Error listing storage files:", error);
+          setImages([]);
+          return;
+        }
 
-      if (error) {
-        console.log(error);
-      }
-      if (!error && data) {
+        if (!data) {
+          setImages([]);
+          return;
+        }
+
         const files = data
           .filter((file) => file.name !== ".emptyFolderPlaceholder")
           .map((file) => {
-            const { data } = supabase.storage
+            const { data: pub } = supabase.storage
               .from(bucketName)
               .getPublicUrl(`${path}/${file.name}`);
 
             return {
               name: file.name,
-              url: data.publicUrl,
+              url: pub.publicUrl,
             };
           });
 
-        setImages(files);
+        if (mounted) setImages(files);
+      } catch (err) {
+        console.error("Failed to fetch images:", err);
+      } finally {
+        if (mounted) setLoading(false);
       }
-
-      setLoading(false);
     };
 
     fetchImages();
-    console.log(images);
-  }, [bucketName, path, supabase]);
+
+    return () => {
+      mounted = false;
+    };
+  }, [open, bucketName, path, supabase]);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">{children}</Button>
       </DialogTrigger>
@@ -112,6 +132,10 @@ export default function StorageDialog({
             <button
               key={image.name}
               className="group relative aspect-square rounded-md border overflow-hidden hover:ring-2 hover:ring-primary transition"
+              onClick={() => {
+                onSelect?.(image.url);
+                setOpen(false);
+              }}
             >
               <Image
                 src={image.url}

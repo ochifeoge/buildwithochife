@@ -18,9 +18,9 @@ export default async function AccountLayout({
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen ">
       <AccountSidebar />
-      <main className="flex-1 p-6 bg-muted/30">{children}</main>
+      <main className="flex-1 overflow-y-auto p-6 bg-muted/30">{children}</main>
     </div>
   );
 }

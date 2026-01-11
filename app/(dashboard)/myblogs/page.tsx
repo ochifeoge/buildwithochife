@@ -2,28 +2,17 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { BlogCard } from "./BlogCard";
-const mockBlogs = [
-  {
-    id: "1",
-    title: "How I Built a Wedding Website With Payments",
-    excerpt:
-      "A behind-the-scenes breakdown of building a real-world wedding website with gift payments, QR codes, and Amazon links.",
-    status: "published" as const,
-    createdAt: "2 days ago",
-  },
-  {
-    id: "2",
-    title: "Designing Landing Pages That Convert",
-    excerpt:
-      "Lessons learned from building aesthetic, high-conversion landing pages for creatives and startups.",
-    status: "draft" as const,
-    createdAt: "1 week ago",
-  },
-];
+import { createClient } from "@/lib/supabase/server";
+import { FetchBlog } from "@/lib/validators/blog";
 
-export default function MyBlogs() {
+export default async function MyBlogs() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("blogs").select();
+
+  if (error) throw new Error();
+  console.log(data);
   return (
-    <div className="flex  flex-col gap-6 p-6">
+    <div className="flex overflow-y-auto  flex-col gap-6 p-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -35,8 +24,9 @@ export default function MyBlogs() {
       </div>
 
       {/* Blog grid */}
+
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {mockBlogs.map((blog) => (
+        {data.map((blog: FetchBlog) => (
           <BlogCard key={blog.id} {...blog} />
         ))}
       </div>

@@ -31,6 +31,7 @@ import {
 import { CreateProjectAction, UpdateProjectAction } from "./project.actions";
 import { Loader } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
 interface ProjectFormProps {
   mode: "create" | "edit";
@@ -100,12 +101,21 @@ export default function ProjectForm({ mode, defaultValues }: ProjectFormProps) {
       formData.append("image", imageFile);
     }
 
-    startTransition(() => {
-      if (mode === "create") {
-        CreateProjectAction(formData);
-      } else {
-        if (!defaultValues) throw new Error("No project to edit");
-        UpdateProjectAction(defaultValues.id, formData);
+    startTransition(async () => {
+      try {
+        if (mode === "create") {
+          await CreateProjectAction(formData);
+          toast.success("Project created ");
+        } else {
+          if (!defaultValues) throw new Error("No project to edit");
+          await UpdateProjectAction(defaultValues.id, formData);
+        }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error("something went wrong");
+        }
       }
     });
   }

@@ -5,6 +5,7 @@ import RotatingText from "./RotatingText";
 export default function Hero() {
   return (
     <section className="container min-h-[60vh] md:min-h-[85vh] grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
+      {/* bg-[url('/heroImg.jpg')] */}
       {/* LEFT */}
       <div className="space-y-6">
         <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">

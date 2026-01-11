@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, DM_Serif_Text } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sooner";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -96,6 +97,7 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
+        <Toaster richColors />
         <body className="antialiased">{children}</body>
       </ThemeProvider>
     </html>
