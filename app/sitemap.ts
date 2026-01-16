@@ -15,11 +15,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: project.updated_at,
     })) ?? [];
 
-  const { data: blogs } = await supabase.from("blogs").select("id, updated_at");
+  const { data: blogs } = await supabase
+    .from("blogs")
+    .select("slug, updated_at");
 
   const blogUrls =
     blogs?.map((blog) => ({
-      url: `https://buildwithochife.vercel.app/blogs/${blog.id}`,
+      url: `https://buildwithochife.vercel.app/blogs/${blog.slug}`,
       lastModified: blog.updated_at,
     })) ?? [];
 

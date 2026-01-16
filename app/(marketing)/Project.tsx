@@ -22,7 +22,7 @@ export function Projects({ projects }: ProjectsProps) {
       className="space-y-10"
     >
       {/* Grid */}
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2 px-2">
         {projects.map((project) => (
           <motion.div
             key={project.id}
