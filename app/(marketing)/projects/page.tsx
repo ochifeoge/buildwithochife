@@ -63,7 +63,13 @@ export default async function ProjectsPage() {
         <div className="absolute inset-0 bg-linear-to-b from-[rgba(0,0,0,0.65)] to-[rgba(0,0,0,0.6)]" />
 
         {/* Text */}
-        <Animation />
+        <Animation
+          heading={"Projects"}
+          subheading={"Selected work & case studies"}
+          text={
+            "A collection of real-world projects I’ve designed and built for clients, startups, and personal initiatives."
+          }
+        />
       </section>
 
       {/* Projects Grid */}

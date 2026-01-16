@@ -21,7 +21,7 @@ export default function ContactPopover() {
         <a
           href="https://wa.me/2349022517371"
           target="_blank"
-          className="flex items-center gap-3 rounded-md border p-3 hover:bg-accent"
+          className="flex items-center gap-3 rounded-md border p-3 hover:bg-accent hover:text-foreground"
         >
           <MessageCircle className="h-5 w-5" />
           <div>
@@ -32,7 +32,7 @@ export default function ContactPopover() {
 
         <a
           href="mailto:ochifeoge@gmail.com"
-          className="flex items-center gap-3 rounded-md border p-3 hover:bg-accent"
+          className="flex items-center gap-3 rounded-md border p-3 hover:bg-accent hover:text-foreground"
         >
           <Mail className="h-5 w-5" />
           <div>

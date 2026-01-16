@@ -1,7 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
 
-export default function Animation() {
+export default function Animation({
+  heading,
+  subheading,
+  text,
+}: {
+  heading: string;
+  subheading: string;
+  text: string;
+}) {
   return (
     <div className="relative z-10 flex h-full items-center">
       <div className="container space-y-4">
@@ -11,7 +19,7 @@ export default function Animation() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-sm uppercase tracking-widest text-white/70"
         >
-          Projects
+          {heading}
         </motion.p>
 
         <motion.h1
@@ -20,7 +28,7 @@ export default function Animation() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
           className="max-w-2xl text-4xl font-semibold text-white sm:text-5xl"
         >
-          Selected work & case studies
+          {subheading}
         </motion.h1>
 
         <motion.p
@@ -29,8 +37,7 @@ export default function Animation() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
           className="max-w-xl text-base text-white/80"
         >
-          A collection of real-world projects I’ve designed and built for
-          clients, startups, and personal initiatives.
+          {text}
         </motion.p>
       </div>
     </div>

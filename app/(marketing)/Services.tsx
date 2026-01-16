@@ -1,4 +1,3 @@
-import ElectricBorder from "@/components/ElectricBorder";
 import {
   Card,
   CardContent,

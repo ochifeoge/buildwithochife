@@ -22,7 +22,7 @@ export default function Hero() {
 
               "founders & agencies",
             ]}
-            mainClassName="inline-flex items-center rounded-md bg-accent px-3 py-1 text-accent-foreground"
+            mainClassName="inline-flex items-center rounded-md  px-3 py-1 text-foreground"
             staggerFrom="last"
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
@@ -52,7 +52,7 @@ export default function Hero() {
       <div className="relative  h-70 md:h-130 w-full block">
         <div className="absolute inset-0 rounded-2xl bg-accent" />
         <Image
-          src="/heroImg.jpg"
+          src="/hero.jpg"
           alt="Modern website development workspace"
           fill
           className="relative rounded-2xl object-cover shadow-lg"

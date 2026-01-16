@@ -11,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
         "/myblogs",
         "/myprojects",
         "/settings",
+        "/api/",
+        "/_next/",
       ],
     },
     sitemap: "https://buildwithochife.vercel.app/sitemap.xml",

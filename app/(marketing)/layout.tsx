@@ -3,7 +3,7 @@ import Navbar from "@/components/web/Navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="px-4">
+    <main className="md:px-4">
       <Navbar />
       {children}
       <Footer />

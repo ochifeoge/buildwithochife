@@ -4,39 +4,50 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Fonts — KEEP YOUR SETUP */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
+  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-accent: var(--font-accent), serif;
+
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -44,100 +55,97 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-
-  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-  --font-accent: var(--font-accent), serif;
 }
 
 :root {
+  --background: oklch(0.9911 0 0);
+  --foreground: oklch(0.2046 0 0);
+
+  --card: oklch(0.9911 0 0);
+  --card-foreground: oklch(0.2046 0 0);
+
+  --popover: oklch(0.9911 0 0);
+  --popover-foreground: oklch(0.4386 0 0);
+
+  --primary: oklch(0.6048 0.2166 257.2136);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.994 0 0);
+  --secondary-foreground: oklch(0.2046 0 0);
+
+  --muted: oklch(0.9461 0 0);
+  --muted-foreground: oklch(0.2435 0 0);
+
+  --accent: oklch(0.6048 0.2166 257.2136);
+  --accent-foreground: oklch(0.9517 0.0259 239.0657);
+
+  --destructive: oklch(0.5523 0.1927 32.7272);
+
+  --border: oklch(0.9037 0 0);
+  --input: oklch(0.9731 0 0);
+  --ring: oklch(0.6048 0.2166 257.2136);
+
+  --chart-1: oklch(0.6048 0.2166 257.2136);
+  --chart-2: oklch(0.6231 0.188 259.8145);
+  --chart-3: oklch(0.6056 0.2189 292.7172);
+  --chart-4: oklch(0.7686 0.1647 70.0804);
+  --chart-5: oklch(0.6959 0.1491 162.4796);
+
+  --sidebar: oklch(0.9911 0 0);
+  --sidebar-foreground: oklch(0.5452 0 0);
+  --sidebar-primary: oklch(0.6048 0.2166 257.2136);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.9517 0.0259 239.0657);
+  --sidebar-accent-foreground: oklch(0.3791 0.1378 265.5222);
+  --sidebar-border: oklch(0.9037 0 0);
+  --sidebar-ring: oklch(0.6048 0.2166 257.2136);
+
   /* Layout */
   --radius: 0.65rem;
-
-  /* Base */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.15 0 0);
-
-  /* Surfaces */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-
-  /* Primary (strong CTA / headings) */
-  --primary: oklch(0.22 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-
-  /* Secondary (soft UI elements) */
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.22 0 0);
-
-  /* Muted (helper text, labels) */
-  --muted: oklch(0.965 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-
-  /* Accent (alive, interactive, modern) */
-  --accent: oklch(0.88 0.06 200);
-  --accent-foreground: oklch(0.22 0 0);
-
-  /* Destructive */
-  --destructive: oklch(0.58 0.23 27);
-
-  /* Borders & inputs */
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.7 0 0);
-
-  /* Charts */
-  --chart-1: oklch(0.64 0.22 41);
-  --chart-2: oklch(0.6 0.12 185);
-  --chart-3: oklch(0.4 0.07 227);
-  --chart-4: oklch(0.83 0.18 84);
-  --chart-5: oklch(0.77 0.18 70);
-
-  /* Sidebar */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.22 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.88 0.06 200);
-  --sidebar-accent-foreground: oklch(0.22 0 0);
-  --sidebar-border: oklch(0.92 0 0);
-  --sidebar-ring: oklch(0.7 0 0);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: oklch(0.1822 0 0);
+  --foreground: oklch(0.9288 0.0126 255.5078);
+
+  --card: oklch(0.2046 0 0);
+  --card-foreground: oklch(0.9288 0.0126 255.5078);
+
+  --popover: oklch(0.2603 0 0);
+  --popover-foreground: oklch(0.7348 0 0);
+
+  --primary: oklch(0.6048 0.2166 257.2136);
+  --primary-foreground: oklch(0.9288 0.0126 255.5078);
+
+  --secondary: oklch(0.2603 0 0);
+  --secondary-foreground: oklch(0.9851 0 0);
+
+  --muted: oklch(0.2393 0 0);
+  --muted-foreground: oklch(0.7122 0 0);
+
+  --accent: oklch(0.6048 0.2166 257.2136);
+  --accent-foreground: oklch(0.9517 0.0259 239.0657);
+
+  --destructive: oklch(0.3123 0.0852 29.7877);
+
+  --border: oklch(0.2809 0 0);
+  --input: oklch(0.2603 0 0);
+  --ring: oklch(0.6048 0.2166 257.2136);
+
+  --chart-1: oklch(0.6048 0.2166 257.2136);
+  --chart-2: oklch(0.7137 0.1434 254.624);
+  --chart-3: oklch(0.709 0.1592 293.5412);
+  --chart-4: oklch(0.8369 0.1644 84.4286);
+  --chart-5: oklch(0.7845 0.1325 181.912);
+
+  --sidebar: oklch(0.1822 0 0);
+  --sidebar-foreground: oklch(0.6301 0 0);
+  --sidebar-primary: oklch(0.6048 0.2166 257.2136);
+  --sidebar-primary-foreground: oklch(0.9288 0.0126 255.5078);
+  --sidebar-accent: oklch(0.3791 0.1378 265.5222);
+  --sidebar-accent-foreground: oklch(0.9517 0.0259 239.0657);
+  --sidebar-border: oklch(0.2809 0 0);
+  --sidebar-ring: oklch(0.6048 0.2166 257.2136);
 }
 
 @layer base {
@@ -158,9 +166,8 @@
 /* ======================================================
    TipTap Editor + Blog Content (with resize handles)
 ====================================================== */
-
 @layer components {
-  .tiptap {
+  :is(.tiptap, #blog) {
     color: var(--foreground);
     font-size: 1rem;
     line-height: 1.75;
@@ -169,10 +176,10 @@
 
   /* ---------------- Headings ---------------- */
 
-  .tiptap h1,
-  .tiptap h2,
-  .tiptap h3,
-  .tiptap h4 {
+  :is(.tiptap, #blog) h1,
+  :is(.tiptap, #blog) h2,
+  :is(.tiptap, #blog) h3,
+  :is(.tiptap, #blog) h4 {
     font-weight: 700;
     line-height: 1.25;
     margin: 2.5rem 0 1rem;
@@ -180,53 +187,56 @@
     letter-spacing: -0.015em;
   }
 
-  .tiptap h1 {
+  :is(.tiptap, #blog) h1 {
     font-size: 2.5rem;
   }
-  .tiptap h2 {
+
+  :is(.tiptap, #blog) h2 {
     font-size: 2rem;
   }
-  .tiptap h3 {
+
+  :is(.tiptap, #blog) h3 {
     font-size: 1.5rem;
   }
-  .tiptap h4 {
+
+  :is(.tiptap, #blog) h4 {
     font-size: 1.25rem;
   }
 
   /* ---------------- Paragraphs ---------------- */
 
-  .tiptap p {
+  :is(.tiptap, #blog) p {
     margin: 1rem 0;
   }
 
   /* ---------------- Links ---------------- */
 
-  .tiptap a {
+  :is(.tiptap, #blog) a {
     color: var(--primary);
-    text-decoration: double;
+    text-decoration: underline;
     text-underline-offset: 4px;
     font-weight: 500;
   }
 
-  .tiptap a:hover {
+  :is(.tiptap, #blog) a:hover {
     opacity: 0.85;
   }
 
   /* ---------------- Lists ---------------- */
 
-  .tiptap ul,
-  .tiptap ol {
+  :is(.tiptap, #blog) ul,
+  :is(.tiptap, #blog) ol {
     padding-left: 1.5rem;
     margin: 1.25rem 0;
   }
 
-  .tiptap li {
+  :is(.tiptap, #blog) li {
     margin: 0.4rem 0;
   }
 
   /* ---------------- Inline code ---------------- */
 
-  .tiptap code {
+  :is(.tiptap, #blog) code {
     background: var(--muted);
     color: var(--foreground);
     padding: 0.15rem 0.4rem;
@@ -237,7 +247,7 @@
 
   /* ---------------- Code blocks ---------------- */
 
-  .tiptap pre {
+  :is(.tiptap, #blog) pre {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -248,14 +258,14 @@
     font-size: 0.9rem;
   }
 
-  .tiptap pre code {
+  :is(.tiptap, #blog) pre code {
     background: transparent;
     padding: 0;
   }
 
   /* ---------------- Blockquote ---------------- */
 
-  .tiptap blockquote {
+  :is(.tiptap, #blog) blockquote {
     margin: 2rem 0;
     padding: 0.75rem 1.25rem;
     border-left: 4px solid var(--primary);
@@ -267,7 +277,7 @@
 
   /* ---------------- Horizontal rule ---------------- */
 
-  .tiptap hr {
+  :is(.tiptap, #blog) hr {
     border: none;
     border-top: 1px solid var(--border);
     margin: 3rem 0;
@@ -275,7 +285,7 @@
 
   /* ---------------- Images ---------------- */
 
-  .tiptap img {
+  :is(.tiptap, #blog) img {
     max-width: 100%;
     height: auto;
     border-radius: var(--radius-xl);
@@ -284,7 +294,7 @@
   }
 
   /* ======================================================
-     Image resize handles (THIS is what you asked for)
+     Editor-only (Tiptap specific)
   ====================================================== */
 
   .tiptap [data-resizable-image] {
@@ -326,15 +336,16 @@
     cursor: nwse-resize;
   }
 
-  /* ---------------- Selected image outline ---------------- */
-
   .tiptap .ProseMirror-selectednode img {
     outline: 2px solid var(--primary);
     outline-offset: 4px;
   }
 }
 
-/* Resize handles for Image extension (keeps existing behavior) */
+/* ======================================================
+   Resize handles (editor-only, unchanged)
+====================================================== */
+
 .tiptap [data-resize-handle] {
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
@@ -360,16 +371,19 @@
   left: -4px;
   cursor: nwse-resize;
 }
+
 .tiptap [data-resize-handle="top-right"] {
   top: -4px;
   right: -4px;
   cursor: nesw-resize;
 }
+
 .tiptap [data-resize-handle="bottom-left"] {
   bottom: -4px;
   left: -4px;
   cursor: nesw-resize;
 }
+
 .tiptap [data-resize-handle="bottom-right"] {
   bottom: -4px;
   right: -4px;
@@ -390,18 +404,14 @@
   bottom: 8px;
 }
 
-/* Selected node outline when resizing */
-.tiptap [data-resize-state="true"] [data-resize-wrapper] {
-  outline: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 0.125rem;
-}
+/* ---------------- Responsive ---------------- */
 
-/* Accessibility helpers and small responsive tweaks */
 @media (max-width: 640px) {
-  .tiptap h1 {
+  :is(.tiptap, #blog) h1 {
     font-size: 1.5rem;
   }
-  .tiptap h2 {
+
+  :is(.tiptap, #blog) h2 {
     font-size: 1.25rem;
   }
 }
