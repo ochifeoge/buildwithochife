@@ -1,35 +1,48 @@
 import Link from "next/link";
-import { Suspense } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Projects } from "./Project";
-import { ProjectsSkeleton } from "./ProjectsSkeleton";
 import { createClient } from "@/lib/supabase/server";
+import type { Project } from "@/lib/types/project";
+
+function homepageProjects(projects: Project[]) {
+  return [...projects]
+    .sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      return (
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+      );
+    })
+    .slice(0, 3);
+}
 
 export default async function ProjectSection() {
   const supabase = await createClient();
-
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("projects")
-    .select()
-    .eq("featured", true);
-
-  if (error) throw new Error();
-  const projects = data;
+    .select("*")
+    .eq("status", "published");
+  const projects = homepageProjects((data ?? []) as Project[]);
   return (
-    <section className="container lg:py-16 py-8">
-      {/* Header */}
-      <div className="flex items-end justify-between gap-4 mb-8">
-        <h2 className="text-3xl font-semibold sm:text-4xl">Selected work</h2>
-        <Link
-          href="/projects"
-          className="text-sm text-muted-foreground hover:text-foreground transition"
-        >
-          View all →
-        </Link>
+    <section className="shell section-space work-section" id="work">
+      <div className="section-heading">
+        <p className="eyebrow">01 / SELECTED WORK</p>
+        <h2>
+          Less talk.
+          <br />
+          <em>More proof.</em>
+        </h2>
+        <div>
+          <p>
+            Different businesses. Different challenges.
+            <br />
+            Thoughtful work, built to be used.
+          </p>
+          <Link href="/projects" className="text-link">
+            All projects <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
+        </div>
       </div>
-
-      <Suspense fallback={<ProjectsSkeleton />}>
-        <Projects projects={projects} />
-      </Suspense>
+      <Projects projects={projects} />
     </section>
   );
 }

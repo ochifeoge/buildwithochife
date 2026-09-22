@@ -1,129 +1,84 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/types/project";
-import { ExternalLink, Github, Calendar, Star } from "lucide-react";
-
-interface ProjectsProps {
-  projects: Project[];
-}
-
-export function Projects({ projects }: ProjectsProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      viewport={{ once: true }}
-      className="space-y-10"
-    >
-      {/* Grid */}
-      <div className="grid gap-8 md:grid-cols-2 px-2">
-        {projects.map((project) => (
-          <motion.div
-            key={project.id}
-            whileHover={{ y: -6 }}
-            transition={{ type: "spring", stiffness: 220, damping: 20 }}
-            className="rounded-xl"
-          >
-            <Card className="group overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-shadow duration-300">
-              <Link href={`/projects/${project.id}`} className="block">
-                {/* Image + overlay */}
-                {project.preview_image_url ? (
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-100">
-                    <Image
-                      src={project.preview_image_url}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-
-                    <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-90" />
-
-                    {project.featured && (
-                      <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-amber-500/95 px-3 py-1 text-xs font-semibold text-white">
-                        <Star className="w-4 h-4" /> Featured
-                      </div>
-                    )}
-
-                    <div className="absolute top-4 right-4">
-                      <Badge variant="secondary" className="capitalize">
-                        {project.type}
-                      </Badge>
-                    </div>
-
-                    <div className="absolute bottom-3 left-4 text-xs text-white/90 flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      <span>
-                        {new Date(project.created_at).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          }
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="h-40 w-full bg-slate-100" />
-                )}
-
-                <CardContent className="space-y-3 p-6">
-                  <h3 className="text-lg font-semibold leading-tight group-hover:text-slate-900">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-sm text-muted-foreground line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {project.tech_stack?.slice(0, 6).map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      {project.live_url && (
-                        <a
-                          href={project.live_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-md bg-slate-900 text-white px-3 py-1 text-sm hover:opacity-90"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                          Live
-                        </a>
-                      )}
-
-                      {project.github_url && (
-                        <a
-                          href={project.github_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm text-muted-foreground hover:bg-slate-50"
-                        >
-                          <Github className="w-4 h-4" />
-                          Code
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </CardContent>
-              </Link>
-            </Card>
-          </motion.div>
-        ))}
+import { caseStudy, projectImage } from "@/lib/case-studies";
+export function Projects({ projects }: { projects: Project[] }) {
+  if (!projects.length)
+    return (
+      <div className="work-empty">
+        <p>Project details are temporarily unavailable.</p>
+        <Link className="text-link" href="/contact">
+          Ask me about relevant work{" "}
+          <ArrowUpRight size={18} aria-hidden="true" />
+        </Link>
       </div>
-    </motion.div>
+    );
+  return (
+    <div className="work-grid">
+      {projects.map((project, i) => {
+        const story = caseStudy(project);
+        const preview = projectImage(project);
+        return (
+          <article
+            className={`work-item ${i === 0 ? "work-featured" : ""}`}
+            key={project.id}
+            data-reveal
+          >
+            <Link
+              href={`/projects/${project.id}`}
+              className={`work-image ${story.tone}`}
+              aria-label={`View ${story.name} case study`}
+            >
+              <div className="browser-frame">
+                <div className="browser-bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <small>{story.name}</small>
+                </div>
+                <div className="project-screen">
+                  {preview ? (
+                    <Image
+                      src={preview}
+                      alt={`${story.name} website screenshot`}
+                      fill
+                      sizes={
+                        i === 0
+                          ? "(max-width: 700px) 90vw, 1100px"
+                          : "(max-width: 700px) 90vw, 600px"
+                      }
+                      className="project-screenshot"
+                    />
+                  ) : (
+                    <div className="project-placeholder">{story.name}</div>
+                  )}
+                </div>
+              </div>
+              <span className="image-link-icon">
+                <ArrowUpRight size={23} aria-hidden="true" />
+              </span>
+            </Link>
+            <div className="work-caption">
+              <div>
+                <p className="eyebrow">{story.category}</p>
+                <h3>
+                  <Link href={`/projects/${project.id}`}>
+                    {story.name}
+                    <ArrowUpRight size={24} aria-hidden="true" />
+                  </Link>
+                </h3>
+              </div>
+              <div>
+                <p>{story.summary}</p>
+                <Link href={`/projects/${project.id}`} className="text-link">
+                  View case study <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
   );
 }

@@ -1,81 +1,40 @@
-import Image from "next/image";
+import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { Projects } from "../Project";
+import { orderProjects } from "@/lib/case-studies";
 import type { Project } from "@/lib/types/project";
-import { Suspense } from "react";
-import { ProjectsSkeleton } from "../ProjectsSkeleton";
-
-import { Metadata } from "next";
-import Animation from "@/components/web/SectionAnimationText";
-
+import { FinalCTA } from "../FinalCTA";
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Selected work",
   description:
-    "A curated selection of real-world projects showcasing my work in web development, UI engineering, and product-focused solutions.",
-  keywords: [
-    "BuildWithOchife",
-    "projects",
-
-    "Frontend developer projects",
-    "WordPress developer Nigeria",
-
-    "Best website developer in Nigeria",
-  ],
-  openGraph: {
-    title: "Projects",
-    description:
-      "Explore a selection of real-world projects showcasing my work in web development, UI engineering, and modern web technologies.",
-    type: "website",
-    url: "/projects",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects",
-    description:
-      "Explore a selection of real-world projects showcasing my work in web development and UI engineering.",
-  },
+    "Business websites, custom experiences and product interfaces. Explore the thinking and work behind each project.",
+  alternates: { canonical: "/projects" },
 };
 export default async function ProjectsPage() {
   const supabase = await createClient();
-
   const { data } = await supabase
     .from("projects")
     .select("*")
     .eq("status", "published")
     .order("created_at", { ascending: false });
-
-  const projects = (data ?? []) as Project[];
-
   return (
-    <main className="space-y-24">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-105 w-full overflow-hidden">
-        <Image
-          src="/projectBanner.jpg" // replace with your own static image
-          alt="Projects background"
-          fill
-          priority
-          className="object-cover"
-        />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-[rgba(0,0,0,0.65)] to-[rgba(0,0,0,0.6)]" />
-
-        {/* Text */}
-        <Animation
-          heading={"Projects"}
-          subheading={"Selected work & case studies"}
-          text={
-            "A collection of real-world projects I’ve designed and built for clients, startups, and personal initiatives."
-          }
-        />
+    <>
+      <section className="shell section-space">
+        <div className="page-intro">
+          <p className="eyebrow">SELECTED WORK / CASE STUDIES</p>
+          <h1>
+            The thinking.
+            <br />
+            The making. <em>The work.</em>
+          </h1>
+          <p>
+            A closer look at the websites and product interfaces I’ve built,
+            with the context behind the decisions.
+          </p>
+        </div>
+        <Projects projects={orderProjects((data ?? []) as Project[])} />
       </section>
-
-      {/* Projects Grid */}
-      <Suspense fallback={<ProjectsSkeleton />}>
-        <Projects projects={projects} />
-      </Suspense>
-    </main>
+      <FinalCTA />
+    </>
   );
 }

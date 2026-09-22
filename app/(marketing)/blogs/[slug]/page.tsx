@@ -11,20 +11,21 @@ import { dateFormatter } from "@/lib/utils";
 import { FetchBlog } from "@/lib/validators/blog";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const supabase = await createClient();
   const { data: blog, error } = await supabase
     .from("blogs")
     .select("*")
     .eq("slug", slug)
+    .eq("status", true)
     .single();
 
   if (!blog || error) {
@@ -39,6 +40,7 @@ export async function generateMetadata({
   return {
     title: blog.title,
     description,
+    alternates: { canonical: `/blogs/${slug}` },
     openGraph: {
       title: blog.title,
       description,
@@ -61,6 +63,7 @@ export default async function SingleBlogPage({ params }: PageProps) {
     .from("blogs")
     .select("*")
     .eq("slug", slug)
+    .eq("status", true)
     .single();
 
   if (error) throw error;
@@ -68,14 +71,13 @@ export default async function SingleBlogPage({ params }: PageProps) {
 
   const b = blog as FetchBlog;
 
-  const { data: user, error: userError } = await supabase
+  const { data: user } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", b.author_id)
     .single();
 
-  if (userError) throw error;
-  if (!user) notFound();
+  // A missing author profile should not hide an otherwise published article.
 
   return (
     <article className="container mx-auto  max-w-4xl py-16">
@@ -114,7 +116,7 @@ export default async function SingleBlogPage({ params }: PageProps) {
         <Separator />
 
         {b.cover_image && (
-          <div className="w-full lg:w-300 h-80 lg:h-150 rounded-lg overflow-hidden relative  shadow-md">
+          <div className="w-full h-80 lg:h-150 rounded-lg overflow-hidden relative  shadow-md">
             <Image
               src={b.cover_image}
               alt={b.title}
@@ -149,7 +151,7 @@ export default async function SingleBlogPage({ params }: PageProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <p className={``}>{user.display_name}</p>
+            <p className={``}>{user?.display_name ?? "Ogechukwu Ochife"}</p>
             <Link href="/blogs" className={buttonVariants()}>
               Back to blog list
             </Link>

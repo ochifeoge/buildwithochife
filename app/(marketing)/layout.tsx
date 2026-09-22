@@ -1,12 +1,15 @@
 import { Footer } from "@/components/web/footer";
 import Navbar from "@/components/web/Navbar";
-
+import "./portfolio.css";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="md:px-4">
+    <div className="portfolio">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <Navbar />
-      {children}
+      <main id="main-content">{children}</main>
       <Footer />
-    </main>
+    </div>
   );
 }

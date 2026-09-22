@@ -1,106 +1,78 @@
 "use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // 1. Import usePathname
-import { Menu } from "lucide-react";
-import { buttonVariants } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ModeToggle } from "./ThemeSwitcher";
-
-const navOptions = [
-  { title: "Home", path: "/" },
-  { title: "Projects", path: "/projects" },
-  { title: "Blogs", path: "/blogs" },
-  { title: "About", path: "/about" },
+const links = [
+  { label: "Selected work", href: "/#work" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/about" },
 ];
-
 export default function Navbar() {
-  const pathname = usePathname(); // 2. Initialize the hook
-
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   return (
-    <header className="container flex items-center justify-between py-4">
-      {/* Logo */}
-      <h3 className="text-sm font-semibold tracking-tight">
-        Build<span className="text-primary">With</span>
-        <span>Ochife</span>
-      </h3>
-
-      {/* Desktop Nav */}
-      <nav className="hidden items-center gap-8 md:flex">
-        <ul className="flex items-center gap-6">
-          {navOptions.map(({ path, title }) => {
-            // 3. Determine if the link is active
-            const isActive = pathname === path;
-
-            return (
-              <li key={title}>
-                <Link
-                  href={path}
-                  className={cn(
-                    "text-xs transition-colors hover:text-primary",
-                    isActive ? "text- font-semibold" : "text-muted-foreground"
-                  )}
-                >
-                  {title}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        <div className="flex items-center gap-2">
+    <header className="site-header shell">
+      <Link className="wordmark" href="/" aria-label="Build with Ochife home">
+        ochife<span className="brand-dot">.</span>
+        <span className="wordmark-caption">INDEPENDENT DEVELOPER</span>
+      </Link>
+      <nav aria-label="Main navigation" className="desktop-nav">
+        {links.map((l) => (
           <Link
-            href="/contact"
-            className={cn(
-              buttonVariants({ size: "sm" }),
-              pathname === "/contact" && "ring-2 ring-primary" // Optional style for button
-            )}
+            key={l.label}
+            href={l.href}
+            aria-current={pathname === l.href ? "page" : undefined}
           >
-            Contact
+            {l.label}
           </Link>
-          <ModeToggle />
-        </div>
+        ))}
       </nav>
-
-      {/* Mobile Nav */}
-      <Sheet>
-        <SheetTrigger asChild>
-          <button
-            className="inline-flex items-center justify-center rounded-md border p-2 md:hidden"
-            aria-label="Open menu"
+      <div className="header-actions">
+        <Link className="header-cta" href="/contact">
+          Start a project <ArrowUpRight size={17} aria-hidden="true" />
+        </Link>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <button className="menu-toggle" aria-label="Open navigation">
+              <Menu size={23} />
+            </button>
+          </SheetTrigger>
+          <SheetContent
+            className="portfolio-menu"
+            aria-describedby="menu-description"
           >
-            <Menu className="h-5 w-5" />
-          </button>
-        </SheetTrigger>
-
-        <SheetContent side="right" className="w-70">
-          <div className="flex flex-col px-2 gap-6 mt-8">
-            <nav className="flex flex-col gap-4">
-              {navOptions.map(({ path, title }) => (
+            <SheetTitle>Explore</SheetTitle>
+            <SheetDescription id="menu-description">
+              Websites. Products. A better next step.
+            </SheetDescription>
+            <nav aria-label="Mobile navigation">
+              {[
+                ...links,
+                { label: "Journal", href: "/blogs" },
+                { label: "Start a project", href: "/contact" },
+              ].map((l) => (
                 <Link
-                  key={title}
-                  href={path}
-                  className={cn(
-                    "text-sm font-medium transition hover:text-primary",
-                    pathname === path ? "text-primary" : "text-muted-foreground"
-                  )}
+                  href={l.href}
+                  key={l.label}
+                  onClick={() => setOpen(false)}
                 >
-                  {title}
+                  {l.label}
+                  <ArrowUpRight size={20} aria-hidden="true" />
                 </Link>
               ))}
             </nav>
-
-            <Link
-              href="/contact"
-              className={cn(buttonVariants({ size: "sm" }), "mt-4")}
-            >
-              Contact
-            </Link>
-            <ModeToggle />
-          </div>
-        </SheetContent>
-      </Sheet>
+          </SheetContent>
+        </Sheet>
+      </div>
     </header>
   );
 }

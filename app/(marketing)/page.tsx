@@ -1,26 +1,22 @@
+import type { Metadata } from "next";
 import Hero from "@/components/web/Hero";
 import Services from "./Services";
-import { WhoIWorkWith } from "./WhoIWorkWith";
 import { Process } from "./Process";
 import { FinalCTA } from "./FinalCTA";
 import ProjectSection from "./projectSection";
-import BlogSection from "./Blogsection";
-
+import About from "@/components/web/About";
+import PortfolioMotion from "@/components/web/PortfolioMotion";
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
     <>
       <Hero />
-
-      <Services />
-      <WhoIWorkWith />
-
-      {/* Projects section (keeps same position) */}
       <ProjectSection />
-
-      {/* Blog preview section: show up to 3 latest posts */}
-      <BlogSection />
+      <Services />
       <Process />
+      <About />
       <FinalCTA />
+      <PortfolioMotion />
     </>
   );
 }

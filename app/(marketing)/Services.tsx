@@ -1,77 +1,63 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { Code, Search, Zap } from "lucide-react";
-
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 const services = [
   {
-    title: "High-Performance Websites",
-    description:
-      "Fast, responsive websites built with modern tools to ensure smooth user experience across all devices.",
-    icon: Zap,
+    name: "Business websites",
+    copy: "Give customers a clear reason to choose you. A focused website or landing page built around your offer, your audience and the next step you want them to take.",
+    detail: "BUSINESS SITES / LANDING PAGES / BOOKINGS",
   },
   {
-    title: "SEO & Conversion Focused",
-    description:
-      "I structure and optimize your site to rank better on search engines and convert visitors into clients.",
-    icon: Search,
+    name: "Web applications",
+    copy: "Turn a workflow or product idea into software people can use. From customer portals to SaaS products and internal dashboards, with the frontend and backend working together.",
+    detail: "SAAS / DASHBOARDS / CUSTOMER PORTALS",
   },
   {
-    title: "Clean, Scalable Code",
-    description:
-      "Maintainable front-end architecture that scales as your business grows — no hacks, no clutter.",
-    icon: Code,
+    name: "Website redesigns",
+    copy: "Your business has moved forward. Your website should too. Improve the structure, messaging and mobile experience so visitors can find what matters and act on it.",
+    detail: "UX / PERFORMANCE / CONVERSION PATHS",
   },
 ];
-
 export default function Services() {
   return (
-    <section className="container py-20">
-      {/* Heading */}
-      <div className="max-w-2xl mb-12 mx-auto text-center">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          How I help businesses grow online
-        </h2>
-        <p className="mt-4 text-muted-foreground">
-          I don’t just build websites — I create digital experiences designed to
-          attract, engage, and convert the right audience.
-        </p>
-      </div>
-
-      {/* Cards */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, index) => (
-          <Card
-            className="transition-shadow hover:shadow-md relative"
-            key={index}
-          >
-            <GlowingEffect
-              blur={0}
-              borderWidth={3}
-              spread={80}
-              glow={true}
-              disabled={false}
-              // variant="blue"
-              proximity={64}
-              inactiveZone={0.01}
-            />
-            <CardHeader>
-              <service.icon className="h-7 w-7 text-accent" />
-              <CardTitle className="mt-4 text-lg">{service.title}</CardTitle>
-            </CardHeader>
-
-            <CardContent>
-              <CardDescription className="leading-relaxed">
-                {service.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
-        ))}
+    <section className="services-section" id="services">
+      <div className="shell section-space">
+        <div className="section-heading">
+          <p className="eyebrow">02 / HOW I CAN HELP</p>
+          <h2>
+            Built for the way
+            <br />
+            your business <em>works.</em>
+          </h2>
+          <p>
+            A clear purpose for every page.
+            <br />A practical reason for every feature.
+          </p>
+        </div>
+        <div className="service-list">
+          {services.map((s, i) => (
+            <article key={s.name} className="service-row" data-reveal>
+              <span className="row-index">0{i + 1}</span>
+              <h3>{s.name}</h3>
+              <div>
+                <p>{s.copy}</p>
+                <small>{s.detail}</small>
+              </div>
+              <Link
+                href={`/contact?service=${encodeURIComponent(s.name)}`}
+                aria-label={`Discuss ${s.name.toLowerCase()}`}
+                className="service-arrow"
+              >
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
+        </div>
+        <div className="service-footnote">
+          <span>Not sure what you need? Start with the problem.</span>
+          <Link href="/contact" className="text-link">
+            Let’s talk it through <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </section>
   );

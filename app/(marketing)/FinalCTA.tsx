@@ -1,18 +1,35 @@
-import ContactPopover from "@/components/web/contact-popover";
-
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { site } from "@/lib/site";
 export function FinalCTA() {
   return (
-    <section className="container py-32 text-center">
-      <h2 className="text-3xl font-semibold sm:text-4xl">
-        Ready to build something meaningful?
-      </h2>
-      <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-        Let’s create a website that reflects your vision and drives real
-        results.
-      </p>
-
-      <div className="mt-8 flex justify-center">
-        <ContactPopover />
+    <section className="final-cta">
+      <div className="shell">
+        <p className="eyebrow">YOUR NEXT CHAPTER, ONLINE</p>
+        <div className="final-cta-row">
+          <h2>
+            Let’s give your business
+            <br />a better <em>first impression.</em>
+          </h2>
+          <Link
+            href="/contact"
+            className="round-cta"
+            aria-label="Start a project"
+          >
+            <ArrowUpRight aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="final-cta-bottom">
+          <p>
+            A new website, a fresh start, or a product worth building.
+            <br />
+            Tell me what you have in mind.
+          </p>
+          <Link href="/contact" className="text-link">
+            Start a project <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
       </div>
     </section>
   );

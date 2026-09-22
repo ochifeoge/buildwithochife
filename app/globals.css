@@ -150,10 +150,11 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50 font-poppins!;
+    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground tracking-normal;
+    font-family: var(--font-poppins), Arial, sans-serif;
   }
 }
 

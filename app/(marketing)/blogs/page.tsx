@@ -1,14 +1,13 @@
 import { BlogCard } from "@/components/web/BlogCard";
 import { BlogCardSkeleton } from "@/components/web/BlogCardSkelenton";
-import Animation from "@/components/web/SectionAnimationText";
 import { createClient } from "@/lib/supabase/server";
-import Image from "next/image";
 import { Suspense } from "react";
 import BlogListControls from "@/components/web/BlogListControls";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Journal",
+  alternates: { canonical: "/blogs" },
   description:
     "Clear, practical articles on frontend development that help clients understand key concepts, make better technical decisions, and build websites that support real business goals.",
   keywords: [
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
     description:
       "Client-friendly articles explaining frontend concepts, offering practical website tips, and showing how modern web decisions impact business growth.",
     type: "website",
-    url: "/blog",
+    url: "/blogs",
   },
 
   twitter: {
@@ -58,31 +57,24 @@ export default async function BlogsPage() {
 
   return (
     <>
-      <section className="relative h-[60vh] min-h-105 w-full overflow-hidden">
-        <Image
-          src="/projectBanner.jpg" // replace with your own static image
-          alt="Projects background"
-          fill
-          priority
-          className="object-cover"
-        />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-[rgba(0,0,0,0.65)] to-[rgba(0,0,0,0.6)]" />
-
-        {/* Text */}
-        <Animation
-          heading={"Blogs"}
-          subheading={"Learn something new today"}
-          text={"Collection of blog posts curated to help solve problems"}
-        />
-      </section>
+      <header className="shell page-intro journal-intro">
+        <p className="eyebrow">THE JOURNAL</p>
+        <h1>
+          Notes on building
+          <br />
+          <em>better websites.</em>
+        </h1>
+        <p>
+          Practical thoughts on the decisions that connect good software with
+          better business.
+        </p>
+      </header>
 
       <section className="container mx-auto max-w-6xl py-12">
         <div className="mb-6">
           <p className="text-muted-foreground">
-            Latest insights, tutorials and stories from the team. Browse, search
-            and discover posts that interest you.
+            Insights and practical notes from Ochife. Browse, search and
+            discover posts that interest you.
           </p>
         </div>
 

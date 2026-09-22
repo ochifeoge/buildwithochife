@@ -1,14 +1,20 @@
+import Link from "next/link";
+import { site } from "@/lib/site";
 export function Footer() {
   return (
-    <footer className="border-t">
-      <div className="container flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} BuildWithOchife
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Designed & built with care.
-        </p>
-      </div>
+    <footer className="site-footer shell">
+      <Link href="/" className="wordmark">
+        ochife<span className="brand-dot">.</span>
+      </Link>
+      <p>Independent by choice. Personal by design.</p>
+      <nav aria-label="Footer navigation">
+        <Link href="/blogs">Journal</Link>
+        <a href={`mailto:${site.email}`}>Email</a>
+        <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">
+          WhatsApp ↗
+        </a>
+      </nav>
+      <small>© {new Date().getFullYear()} BuildWithOchife</small>
     </footer>
   );
 }

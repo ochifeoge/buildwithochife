@@ -19,18 +19,17 @@ export const accent = DM_Serif_Text({
 
 export const metadata: Metadata = {
   title: {
-    default: "BuildWithOchife — Website Developer in Nigeria",
+    default: "Ochife — Business Websites & Web Applications",
     template: "%s | BuildWithOchife",
   },
 
   description:
-    "BuildWithOchife is a professional website developer in Nigeria, building fast, SEO-optimised websites for individuals, startups, healthcare platforms, and growing businesses.",
+    "Ogechukwu Ochife builds conversion-focused business websites, landing pages and web applications. Independent full-stack development, from first conversation to launch.",
 
   keywords: [
     "BuildWithOchife",
     "Ochife",
     "Ogechukwu Ochife",
-    "tactical god",
     "Website developer in Nigeria",
     "Web developer Nigeria",
     "Frontend developer Nigeria",
@@ -38,7 +37,6 @@ export const metadata: Metadata = {
     "Startup website developer",
     "Healthcare website developer",
     "Nursing platform developer",
-    "Best website developer in Nigeria",
   ],
 
   authors: [{ name: "Ogechukwu Ochife" }],
@@ -47,14 +45,10 @@ export const metadata: Metadata = {
 
   metadataBase: new URL("https://buildwithochife.vercel.app"),
 
-  alternates: {
-    canonical: "/",
-  },
-
   openGraph: {
-    title: "BuildWithOchife — Website Developer in Nigeria",
+    title: "Ochife — Business Websites & Web Applications",
     description:
-      "I design and build fast, SEO-optimised websites for individuals, startups, and healthcare professionals.",
+      "Business websites and web applications built with purpose. Work directly with Ogechukwu Ochife, an independent full-stack developer.",
     url: "https://buildwithochife.vercel.app",
     siteName: "BuildWithOchife",
 
@@ -64,9 +58,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "BuildWithOchife — Website Developer in Nigeria",
+    title: "Ochife — Business Websites & Web Applications",
     description:
-      "Professional website developer in Nigeria building SEO-optimised websites for businesses, startups, and healthcare platforms.",
+      "Websites that help businesses win customers. Web applications that make work easier. Built by Ogechukwu Ochife.",
     creator: "@Tactical_God",
   },
 
@@ -90,16 +84,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${accent.variable}`}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <Toaster richColors />
-        <body className="antialiased">{children}</body>
-      </ThemeProvider>
+    <html
+      lang="en"
+      className={`${poppins.variable} ${accent.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toaster richColors />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
